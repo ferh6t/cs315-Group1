@@ -43,10 +43,8 @@ DIV \/
 POW \^
 BOOL bool
 SCANNER scanOf
-ID ([a-z]({LETTER}|{DIGIT})*)
-INT ([+-]?[0-9]+)
-DIGIT [0-9]
-LETTER [a-zA-Z]
+ID ([a-z]([a-zA-Z]|[0-9])*)
+INT ([+-]?[0-9]+) 
 STRING \"([^\\\"]|\\\\|\\\"|\\n)*\"
 %%
 {EXEC} return EXEC;
@@ -59,7 +57,6 @@ STRING \"([^\\\"]|\\\\|\\\"|\\n)*\"
 {PRINTOF} return PRINTOF;
 {SCANNER} return SCANNER;
 {CONSTANT} return CONSTANT;
-{DIGIT} return DIGIT;
 {BOOL} return BOOL;
 {IF} return IF;
 {ELSEIF} return ELSEIF;
@@ -93,7 +90,6 @@ STRING \"([^\\\"]|\\\\|\\\"|\\n)*\"
 {INT} return INT;
 {LSQB} return LSQB;
 {RSQB} return RSQB;
-{LETTER} return LETTER;
 {FNC} return FNC;
 {ID} return ID;
 {DOLLAR} return DOLLAR;

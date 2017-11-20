@@ -1,0 +1,37 @@
+exec<
+bool a1;
+bool a2 => False;
+a1 => True;
+if ( a2 ?? True ) { 
+a2 => False;
+}:
+
+else {
+a1 => True;
+}
+bool $a7[4] => {True, False, False, True,};
+while ( a3 imp a4 )  {
+
+
+}
+const bool a5 => True;
+bool a6 => scanOf();
+
+if (a2 ifaoif a1 ) {
+a2 => !a2;
+}: else { a5 => $a5[7]; }
+
+bool a7 => function( a6, );
+const bool "The weather is raining" => True;
+bool $a3[4] => {True, a1, idOfMethod( asd, sd,), False,};
+bool $a4[4] => {True, a1 or a2, False, True,};
+printOf(a6);
+fnc bool idOfMethod ( asd, sd,) {
+	asd => True;
+	sd => False;
+	asds => sad;
+	return asds;
+}
+
+asd => idOfMethod( asd, sd,);
+>end
