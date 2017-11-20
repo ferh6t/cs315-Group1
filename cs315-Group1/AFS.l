@@ -1,11 +1,14 @@
-SPACE [ \t\n]+
-ASSIGN \=>
+ASSIGN \=\>
 NL \n
 FNC fnc
+EXEC exec
+END end
 CONSTANT const
 PRINTOF printOf
 TRUE True
 FALSE False
+WHILE while
+RETURN return
 OR or
 AND and
 XOR xor
@@ -34,7 +37,7 @@ DOLLAR \$
 LSQB \[
 RSQB \]
 PLUS \+
-MINUS -
+MINUS \-
 MUL \*
 DIV \/
 POW \^
@@ -46,11 +49,13 @@ DIGIT [0-9]
 LETTER [a-zA-Z]
 STRING \"([^\\\"]|\\\\|\\\"|\\n)*\"
 %%
+{EXEC} return EXEC;
+{END}} return END;
 {TRUE} return TRUE;
-FALSE return FALSE;
-while   return WHILE;
-return  return RETURN;
-NL return NL;
+{FALSE} return FALSE;
+{WHILE} return WHILE;
+{RETURN} return RETURN;
+{NL} { extern int lineno; lineno++; return NL; }
 {PRINTOF} return PRINTOF;
 {SCANNER} return SCANNER;
 {CONSTANT} return CONSTANT;
@@ -89,13 +94,13 @@ NL return NL;
 {LSQB} return LSQB;
 {RSQB} return RSQB;
 {LETTER} return LETTER;
-{ID} return ID;
 {FNC} return FNC;
+{ID} return ID;
 {DOLLAR} return DOLLAR;
 {NOT} return NOT;
 {STRING} return STRING;
 %%
 int yywrap()
 {
-        return 1;
+	return 1;
 }
