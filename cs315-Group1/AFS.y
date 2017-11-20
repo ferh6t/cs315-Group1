@@ -14,20 +14,20 @@
 %token STRING INT FNC EXEC END
 
 %%
-program: EXEC statementList END
-	;
 
 statementList: statements
 	| statementList statements
 	;
-statements:	while_statement
+statements: NL
+	| while_statement
 	| statement
 	| if_statement
 	| init_var
-	| statements output_statement
-	| statements init_const
-	| statements predicate_def
-	| statements array_init
+	| input_statement
+	| output_statement
+	| init_const
+	| predicate_def
+	| array_init
 	;
 while_statement: WHILE LP expression_bool RP LB statements RB;
 expression_bool: term comparator term
@@ -42,11 +42,13 @@ term: LP expression_bool RP
 	| array_find_val
 	;
 comparator: IFANDONLYIF | OR | IMPLIES | NOTEQUAL | EQUALITY | AND | XOR  | NAND | NOR;
-statement: ID ASSIGN expression_bool  SEMICOLON {printf("here"); };
-input_statement: SCANNER LP RP;
-if_statement: IF LP expression_bool RP LB statements RB
-	| IF LP expression_bool RP LB statements RB ELSE LB statements RB
+statement: ID ASSIGN expression_bool SEMICOLON {printf("here"); };
+input_statement: SCANNER LP RP SEMICOLON;
+if_statement: IF LP expression_bool RP body LB statements body RB
+	| IF LP expression_bool RP body LB statements body RB ELSE body  LB statements body RB
 	;
+body:
+	| body NL;
 init_var: BOOL ID ASSIGN expression_bool SEMICOLON
 	| BOOL ID SEMICOLON
 	;
@@ -60,7 +62,7 @@ init_const: CONSTANT BOOL ID ASSIGN expression_bool SEMICOLON
 	;
 predicate_def: FNC BOOL ID LP bools RP LB predicate_body RB;
 predicate_body: statements RETURN expression_bool SEMICOLON	;
-predicate_call: ID LP bools RP SEMICOLON;
+predicate_call: ID LP bools RP;
 array_find_val: ID LSQB INT RSQB;
 %%
 #include "lex.yy.c"

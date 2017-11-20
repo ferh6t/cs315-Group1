@@ -2,7 +2,7 @@ ASSIGN \=\>
 NL \n
 FNC fnc
 EXEC exec
-END end
+END  end
 CONSTANT const
 PRINTOF printOf
 TRUE True
@@ -50,7 +50,7 @@ LETTER [a-zA-Z]
 STRING \"([^\\\"]|\\\\|\\\"|\\n)*\"
 %%
 {EXEC} return EXEC;
-{END}} return END;
+{END} return END;
 {TRUE} return TRUE;
 {FALSE} return FALSE;
 {WHILE} return WHILE;
